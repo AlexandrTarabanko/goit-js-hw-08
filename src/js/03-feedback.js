@@ -3,7 +3,7 @@ const formRef = document.querySelector('.feedback-form');
 const btnRef = document.querySelector('button[type="submit"]');
 const emailInputRef = document.querySelector('input[name="email"]');
 const messageTextRef = document.querySelector('textarea[name="message"]');
-const dataObj = {};
+let dataObj = {};
 const STORAGE_KEY = 'feedback-form-state';
 
 populate();
@@ -33,7 +33,7 @@ function populate() {
   // }
 
   if (localData) {
-    localData = JSON.parse(localData);
+    localData = JSON.parse(localData) || '';
     // console.log(localData); // log object in localStorage
     // if (!localData.email === undefined) {
     //   localData.email = '';
@@ -42,8 +42,8 @@ function populate() {
     //   localData.message = '';
     //   console.log('ТУТ НЕ БЫЛО ТЕКСТА');
     // }
-    emailInputRef.value = localData.email;
-    messageTextRef.value = localData.message;
+    emailInputRef.value = localData.email || '';
+    messageTextRef.value = localData.message || '';
   }
 }
 
@@ -58,11 +58,12 @@ const onClickSubmit = e => {
   ) {
     alert('Fill all the gaps!');
   } else {
+    dataObj.email = emailInputRef.value;
+    dataObj.message = messageTextRef.value;
     console.log(dataObj);
     formRef.reset();
     window.localStorage.clear();
-    dataObj.email = '';
-    dataObj.message = '';
+    dataObj = {};
   }
 };
 
