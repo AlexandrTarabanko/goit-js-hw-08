@@ -22,8 +22,26 @@ function onInputFill(e) {
 // Populate
 function populate() {
   let localData = localStorage.getItem(STORAGE_KEY);
+
+  // if (localData === undefined) {
+  //   localData = JSON.parse(localData);
+  //   localData.email = '';
+  //   emailInputRef = '';
+  //   localData.message = '';
+  //   messageTextRef = '';
+  //   console.log(localData);
+  // }
+
   if (localData) {
     localData = JSON.parse(localData);
+    // console.log(localData); // log object in localStorage
+    // if (!localData.email === undefined) {
+    //   localData.email = '';
+    //   console.log('ТУТ НЕ БЫЛО ПОЧТЫ');
+    // } else if (!localData.message) {
+    //   localData.message = '';
+    //   console.log('ТУТ НЕ БЫЛО ТЕКСТА');
+    // }
     emailInputRef.value = localData.email;
     messageTextRef.value = localData.message;
   }
@@ -33,12 +51,20 @@ function populate() {
 const onClickSubmit = e => {
   e.preventDefault();
 
-  if (emailInputRef.value === '' || messageTextRef.value === '') {
+  if (
+    emailInputRef.value === '' ||
+    // emailInputRef.value === ' ' ||
+    messageTextRef.value === ' ' ||
+    messageTextRef.value === ''
+  ) {
     alert('Fill all the gaps!');
   } else {
+    // const localData = JSON.parse(localStorage.getItem(STORAGE_KEY));
     console.log(dataObj);
     formRef.reset();
     window.localStorage.clear();
+    dataObj.email = '';
+    dataObj.message = '';
   }
 };
 
