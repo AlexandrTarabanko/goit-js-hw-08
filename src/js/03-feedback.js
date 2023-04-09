@@ -53,13 +53,11 @@ const onClickSubmit = e => {
 
   if (
     emailInputRef.value === '' ||
-    // emailInputRef.value === ' ' ||
     messageTextRef.value === ' ' ||
     messageTextRef.value === ''
   ) {
     alert('Fill all the gaps!');
   } else {
-    // const localData = JSON.parse(localStorage.getItem(STORAGE_KEY));
     console.log(dataObj);
     formRef.reset();
     window.localStorage.clear();
